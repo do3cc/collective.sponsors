@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="collective.sponsors">
+
+    <includeDependencies package="." />
+
+    <i18n:registerTranslations directory="locales" />
+
+    <include package=".browser" />
+
+
+    <genericsetup:registerProfile
+        name="default"
+        title="collective.sponsors"
+        directory="profiles/default"
+        description="Installs the collective.sponsors add-on."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <genericsetup:importStep
+        name="collective.sponsors-postInstall"
+        title="collective.sponsors post_install import step"
+        description="Post install import step from collective.sponsors"
+        handler=".setuphandlers.post_install">
+    </genericsetup:importStep>
+
+</configure>

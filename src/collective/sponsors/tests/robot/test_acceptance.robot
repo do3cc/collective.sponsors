@@ -25,6 +25,7 @@
 
 Resource  plone/app/robotframework/selenium.robot
 Resource  plone/app/robotframework/keywords.robot
+Resource  collective/sponsors/tests/robot/keywords.robot
 
 Library  Remote  ${PLONE_URL}/RobotRemote
 
@@ -34,11 +35,20 @@ Test Teardown  Close all browsers
 
 *** Test Cases ***************************************************************
 
-Scenario: As a member I want to be able to log into the website
-  [Documentation]  Example of a BDD-style (Behavior-driven development) test.
-  Given a login form
-   When I enter valid credentials
-   Then I am logged in
+Scenario: As an admin, I want to be able to quickly add the sponsors folder and sponsors to a new site.
+    Given I am logged in as 'Manager'
+     Then I see A link to create a sponsor folder
+     When I click the create a sponsor folder
+     Then I am in the sponsor folder
+     When I add a new sponsor
+     When I go to the frontpage
+     Then I see the sponsor
+     Then I do not see the sponsor folder in the top level navigation
+
+Scenario: As a visitor, I want to see the sponsors
+    Given I go to the frontpage
+     Then I see the sponsor
+     Then I do not see the sponsor folder in the top level navigation
 
 
 *** Keywords *****************************************************************

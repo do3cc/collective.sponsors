@@ -17,13 +17,17 @@ class TestSetup(unittest.TestCase):
         self.installer = api.portal.get_tool('portal_quickinstaller')
 
     def test_product_installed(self):
-        """Test if collective.sponsors is installed with portal_quickinstaller."""
-        self.assertTrue(self.installer.isProductInstalled('collective.sponsors'))
+        """Test if collective.sponsors
+           is installed with portal_quickinstaller.
+        """
+        self.assertTrue(self.installer.isProductInstalled(
+            'collective.sponsors'))
 
     def test_uninstall(self):
         """Test if collective.sponsors is cleanly uninstalled."""
         self.installer.uninstallProducts(['collective.sponsors'])
-        self.assertFalse(self.installer.isProductInstalled('collective.sponsors'))
+        self.assertFalse(self.installer.isProductInstalled(
+            'collective.sponsors'))
 
     def test_browserlayer(self):
         """Test that ICollectiveSponsorsLayer is registered."""
